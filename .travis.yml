@@ -2,12 +2,20 @@ language: objective-c
 osx_image: xcode8.1
 env:
   matrix:
-    - DESTINATION="platform=iOS Simulator,name=iPhone 7,OS=10.1"
-    - DESTINATION="platform=iOS Simulator,name=iPhone 6s,OS=9.3"
-    - DESTINATION="platform=iOS Simulator,name=iPhone 6,OS=8.4"
+    - SCHEME="Timepiece iOS" SDK="iphonesimulator10.1" DESTINATION="platform=iOS Simulator,name=iPhone 7,OS=10.1"
+    - SCHEME="Timepiece iOS" SDK="iphonesimulator10.1" DESTINATION="platform=iOS Simulator,name=iPhone 6s,OS=9.3"
+    - SCHEME="Timepiece iOS" SDK="iphonesimulator10.1" DESTINATION="platform=iOS Simulator,name=iPhone 6,OS=8.4"
+
+    - SCHEME="Timepiece OSX" SDK="macosx10.12" DESTINATION="platform=OS X,arch=x86_64"
+
+    - SCHEME="Timepiece tvOS" SDK="appletvsimulator10.0" DESTINATION="platform=tvOS Simulator,Apple TV 1080p,OS=10.0"
+    - SCHEME="Timepiece tvOS" SDK="appletvsimulator10.0" DESTINATION="platform=tvOS Simulator,Apple TV 1080p,OS=9.2"
+
+    - SCHEME="Timepiece watchOS" SDK="watchsimulator3.1" DESTINATION="platform=watchOS Simulator,name=Apple Watch - 42mm,OS=3.0"
+    - SCHEME="Timepiece watchOS" SDK="watchsimulator3.1" DESTINATION="platform=watchOS Simulator,name=Apple Watch - 42mm,OS=2.2"
 script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
-  - xcodebuild -project Timepiece.xcodeproj -scheme "Timepiece iOS" -sdk iphonesimulator10.1 -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+  - xcodebuild -project Timepiece.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
 
