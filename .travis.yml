@@ -18,4 +18,5 @@ script:
   - xcodebuild -version
   - xcodebuild -showsdks
   - xcodebuild -project Timepiece.xcodeproj -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=NO test | xcpretty -c
+  - pod lib lint --quick
 

@@ -70,11 +70,13 @@ class DateComponentsTests: XCTestCase {
     }
 
     func testStringInUnitsStyle() {
-        var dateComponents = DateComponents()
-        dateComponents.hour = 3
-        dateComponents.minute = 0
-        dateComponents.second = 5
+        if #available(OSX 10.10, *) {
+            var dateComponents = DateComponents()
+            dateComponents.hour = 3
+            dateComponents.minute = 0
+            dateComponents.second = 5
 
-        XCTAssertEqual(dateComponents.string(in: .positional), "3:00:05")
+            XCTAssertEqual(dateComponents.string(in: .positional), "3:00:05")
+        }
     }
 }
